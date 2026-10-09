@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: "jsdom",
-      pool: "vmThreads",
+      pool: "threads",
       maxWorkers: 2,
       setupFiles: "./src/setupTests.js",
       include: ["src/**/*.test.{js,jsx}"],
