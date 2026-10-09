@@ -5,6 +5,10 @@ import process from "process";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const apiUrl = env.VITE_DELCOM_BASEURL || "https://open-api.delcom.org/api/v1";
+  // Di build produksi, request lewat rewrite Vercel (/api/v1 -> open-api.delcom.org)
+  // agar same-origin dan tidak memicu preflight CORS.
+  const baseUrl = mode === "production" && !env.VITE_DELCOM_BASEURL ? "/api/v1" : apiUrl;
   const port = Number(env.APP_PORT) || 3000;
 
   return {
@@ -12,9 +16,7 @@ export default defineConfig(({ mode }) => {
     server: { port },
     preview: { port },
     define: {
-      DELCOM_BASEURL: JSON.stringify(
-        env.VITE_DELCOM_BASEURL || "https://open-api.delcom.org/api/v1",
-      ),
+      DELCOM_BASEURL: JSON.stringify(baseUrl),
     },
     test: {
       globals: true,
