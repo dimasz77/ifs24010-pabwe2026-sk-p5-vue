@@ -21,12 +21,9 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: "jsdom",
-      pool: "threads",
-      fileParallelism: false,
-      maxWorkers: 1,
       setupFiles: "./src/setupTests.js",
       include: ["src/**/*.test.{js,jsx}"],
-      exclude: ["**/node_modules/**", "**/.bun/**", "**/dist/**"],
+      exclude: ["**/node_modules/**", "**/.bun/**", "**/.node/**", "**/dist/**"],
       reporters: ["default", "junit"],
       outputFile: { junit: "./test-results/junit.xml" },
       coverage: {
@@ -40,6 +37,7 @@ export default defineConfig(({ mode }) => {
           "**/*.test.{js,jsx}",
           "**/node_modules/**",
           "**/.bun/**",
+          "**/.node/**",
         ],
         thresholds: { lines: 100, functions: 100, branches: 100, statements: 100 },
       },
