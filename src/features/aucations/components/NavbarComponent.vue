@@ -1,6 +1,8 @@
 <script setup>
 defineProps({ menuOpen: { type: Boolean, default: false } });
 defineEmits(["toggle-menu", "logout"]);
+
+const logoUrl = "/logo.svg";
 </script>
 
 <template>
@@ -16,7 +18,7 @@ defineEmits(["toggle-menu", "logout"]);
         Menu
       </button>
       <RouterLink to="/" class="flex items-center gap-2 font-bold text-indigo-700">
-        <img src="/logo.svg" alt="" width="24" height="24" />
+        <img :src="logoUrl" alt="" width="24" height="24" />
         Delcom Auction
       </RouterLink>
     </div>
