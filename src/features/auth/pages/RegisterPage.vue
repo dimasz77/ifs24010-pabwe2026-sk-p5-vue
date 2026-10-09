@@ -28,6 +28,7 @@ async function submit() {
       <label for="register-name-input" class="mb-1 block text-sm font-semibold text-slate-700">Nama lengkap</label>
       <input
         id="register-name-input"
+        type="text"
         autocomplete="name"
         required
         :value="name"
