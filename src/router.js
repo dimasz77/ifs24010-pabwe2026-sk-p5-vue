@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getAccessToken } from "./helpers/apiHelper";
 import AuthLayout from "./features/auth/layouts/AuthLayout.vue";
+import LoginPage from "./features/auth/pages/LoginPage.vue";
+import RegisterPage from "./features/auth/pages/RegisterPage.vue";
 import AucationLayout from "./features/aucations/layouts/AucationLayout.vue";
 
 export const routes = [
@@ -8,8 +10,8 @@ export const routes = [
     path: "/auth",
     component: AuthLayout,
     children: [
-      { path: "login", component: () => import("./features/auth/pages/LoginPage.vue") },
-      { path: "register", component: () => import("./features/auth/pages/RegisterPage.vue") },
+      { path: "login", component: LoginPage },
+      { path: "register", component: RegisterPage },
     ],
   },
   {
