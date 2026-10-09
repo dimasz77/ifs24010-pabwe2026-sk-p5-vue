@@ -24,6 +24,8 @@ pipeline {
 
             steps {
                 checkout scm
+                // Bersihkan sisa build lama (.node dan .bun dari percobaan sebelumnya)
+                sh 'rm -rf .node .bun node.tar.gz coverage test-results trivy-results.sarif latest-app.zip'
             }
         }
 
@@ -209,6 +211,9 @@ pipeline {
                         -x ".env" \
                         -x ".env.*" \
                         -x "coverage/*" \
+                        -x "test-results/*" \
+                        -x ".bun/*" \
+                        -x ".node/*" \
                         -x ".next/*" \
                         -x "out/*" \
                         -x ".trivy-cache/*" \
