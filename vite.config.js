@@ -3,35 +3,12 @@ import vue from "@vitejs/plugin-vue";
 import tailwindcss from "@tailwindcss/vite";
 import process from "process";
 
-// Menyisipkan CSS hasil build langsung ke index.html agar tidak ada
-// permintaan CSS yang memblokir render (meningkatkan skor Lighthouse Performance).
-function inlineCss() {
-  return {
-    name: "inline-entry-css",
-    enforce: "post",
-    apply: "build",
-    generateBundle(_, bundle) {
-      const html = bundle["index.html"];
-      if (!html) return;
-      let source = String(html.source);
-      for (const [name, asset] of Object.entries(bundle)) {
-        if (asset.type !== "asset" || !name.endsWith(".css")) continue;
-        const pattern = new RegExp(`<link[^>]*href="[^"]*${name}"[^>]*>`);
-        if (!pattern.test(source)) continue;
-        source = source.replace(pattern, () => `<style>${asset.source}</style>`);
-        delete bundle[name];
-      }
-      html.source = source;
-    },
-  };
-}
-
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const port = Number(env.APP_PORT) || 3000;
 
   return {
-    plugins: [vue(), tailwindcss(), inlineCss()],
+    plugins: [vue(), tailwindcss()],
     server: { port },
     preview: { port },
     define: {
