@@ -22,6 +22,8 @@ export default defineConfig(({ mode }) => {
       globals: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.js",
+      include: ["src/**/*.test.{js,jsx}"],
+      exclude: ["**/node_modules/**", "**/.bun/**", "**/dist/**"],
       reporters: ["default", "junit"],
       outputFile: { junit: "./test-results/junit.xml" },
       coverage: {
@@ -33,7 +35,8 @@ export default defineConfig(({ mode }) => {
           "src/setupTests.js",
           "src/test-utils.js",
           "**/*.test.{js,jsx}",
-          "node_modules/**",
+          "**/node_modules/**",
+          "**/.bun/**",
         ],
         thresholds: { lines: 100, functions: 100, branches: 100, statements: 100 },
       },

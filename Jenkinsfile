@@ -12,6 +12,7 @@ pipeline {
     VITE_DELCOM_BASEURL = 'https://open-api.delcom.org/api/v1'
     APP_PORT = '3000'
     BUN_INSTALL = "${WORKSPACE}/.bun"
+    BUN_INSTALL_CACHE_DIR = "${WORKSPACE_TMP}/bun-cache"
     PATH = "${WORKSPACE}/.bun/bin:${PATH}"
   }
 
